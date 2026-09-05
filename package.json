@@ -30,7 +30,8 @@
     "watch": "tsc -p tsconfig.build.json --watch",
     "build": "pnpm run clean && tsc -p tsconfig.build.json",
     "dev": "vite --config examples/demo/vite.config.ts",
-    "demo:build": "vite build --config examples/demo/vite.config.ts"
+    "demo:build": "vite build --config examples/demo/vite.config.ts",
+    "version:bump": "pnpm version --no-git-tag-version"
   },
   "dependencies": {
     "zod": "^4.5.4"
