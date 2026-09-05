@@ -1,0 +1,10 @@
+node_modules/
+coverage/
+dist/
+build/
+.DS_Store
+*.pem
+.env*.local
+.env
+*.tsbuildinfo
+pnpm-lock.yaml

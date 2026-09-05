@@ -1,0 +1,7 @@
+export { scrollBottom } from "./scrollBottom"
+export { scrollDown } from "./scrollDown"
+export { scrollTop } from "./scrollTop"
+export { scrollUp } from "./scrollUp"
+export { zoomIn } from "./zoomIn"
+export { zoomOut } from "./zoomOut"
+export { zoomReset } from "./zoomReset"

@@ -1,0 +1,46 @@
+{
+  "name": "@fazgray/surfaces",
+  "version": "0.1.0",
+  "description": "Build web UIs that LLMs can act on.",
+  "license": "MIT",
+  "author": "Faz Gray",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./modules/dom": {
+      "types": "./dist/modules/dom/index.d.ts",
+      "import": "./dist/modules/dom/index.js"
+    }
+  },
+  "scripts": {
+    "prepare": "husky",
+    "typecheck": "tsc --pretty --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "format": "prettier --write 'src/**/*.{ts,json,md}' '*.{json,md}'",
+    "clean": "rimraf dist",
+    "build": "pnpm run clean && tsc -p tsconfig.build.json",
+    "watch": "tsc -p tsconfig.build.json --watch"
+  },
+  "dependencies": {
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^27.0.0",
+    "@types/node": "^24.13.3",
+    "husky": "^9.1.7",
+    "jsdom": "^27.4.0",
+    "prettier": "^3.9.6",
+    "rimraf": "^6.1.3",
+    "typescript": "^7.0.2",
+    "vitest": "^3.2.7"
+  }
+}

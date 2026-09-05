@@ -1,0 +1,20 @@
+# Typecheck
+pnpm typecheck ||
+(
+    echo 'Typecheck failed'
+    exit 1
+)
+
+echo '✅ Typecheck successful'
+
+# Run tests
+pnpm test ||
+(
+    echo 'Tests failed'
+    exit 1
+)
+
+echo '✅ Tests passed'
+
+# If everything passes... Now we can commit
+echo ''

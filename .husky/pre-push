@@ -1,0 +1,9 @@
+# Build
+pnpm build ||
+(
+        echo 'Build failed'
+        false;
+)
+echo ""
+echo '✅ Build successful'
+echo ""
