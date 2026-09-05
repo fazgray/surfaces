@@ -62,6 +62,7 @@ describe("schema", () => {
     ui.registerSurface({
       name: "inbox",
       description: "inbox",
+      element: {} as Element,
       actions: [{ id: "mail.open", description: "Open", run: () => undefined }],
     })
     ui.focus.enter("inbox")

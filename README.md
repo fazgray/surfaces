@@ -1,6 +1,6 @@
 # @fazgray/surfaces
 
-Build web UIs that LLMs can act on.
+Build web UIs that LLMs can act on. [Demo](https://fazgray.github.io/surfaces/)
 
 ```ts
 import { create } from "@fazgray/surfaces"
@@ -66,6 +66,6 @@ import { dom } from "@fazgray/surfaces/modules/dom"
 const ui = create({ modules: [dom] })
 ```
 
-Adds scroll and zoom to every live surface: `dom.scroll.down`, `dom.scroll.up`, `dom.scroll.top`, `dom.scroll.bottom`, `dom.zoom.in`, `dom.zoom.out`, `dom.zoom.reset`. They use the surface’s `element` when present, otherwise the window.
+Adds scroll and zoom to live surfaces that have an `element`: `dom.scroll.down`, `dom.scroll.up`, `dom.scroll.top`, `dom.scroll.bottom`, `dom.zoom.in`, `dom.zoom.out`, `dom.zoom.reset`. They use that element, otherwise the window.
 
 ## MIT

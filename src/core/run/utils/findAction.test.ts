@@ -24,6 +24,14 @@ describe("findAction", () => {
     expect(findAction(state, [], "demo.ping")).toBe(ping)
   })
 
+  it("skips module actions when the surface has no element", () => {
+    const ping = actionOf("demo.ping")
+    const state = createState({
+      modules: [{ id: "demo", actions: [ping] }],
+    })
+    expect(findAction(state, [], "demo.ping", false)).toBeUndefined()
+  })
+
   it("returns undefined when the action is missing", () => {
     const state = createState()
     expect(

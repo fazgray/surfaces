@@ -21,7 +21,12 @@ export const execute = async (
     throw new Error(`Surface "${surfaceName}" is not registered`)
   }
 
-  const action = findAction(state, surface.actions, call.actionId)
+  const action = findAction(
+    state,
+    surface.actions,
+    call.actionId,
+    Boolean(surface.element)
+  )
   if (!action) {
     throw new Error(
       `Unknown action "${call.actionId}" on surface "${surfaceName}"`

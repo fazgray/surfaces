@@ -27,7 +27,10 @@ export const schema = (state: SurfacesState): Schema => {
         {
           name: surface.name,
           description: surface.description,
-          actions: [...surface.actions, ...moduleActions].map(serializeAction),
+          actions: [
+            ...surface.actions,
+            ...(surface.element ? moduleActions : []),
+          ].map(serializeAction),
         },
       ]
     }),

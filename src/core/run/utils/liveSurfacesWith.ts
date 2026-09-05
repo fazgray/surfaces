@@ -8,7 +8,7 @@ export const liveSurfacesWith = (
     module.actions.some((action) => action.id === actionId)
   )
   if (moduleHas) {
-    return [...state.live]
+    return state.live.filter((name) => state.surfaces.get(name)?.element)
   }
 
   return state.live.filter((name) =>

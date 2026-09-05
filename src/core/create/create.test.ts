@@ -27,7 +27,26 @@ describe("create", () => {
     )
   })
 
-  it("loads modules onto every live surface", () => {
+  it("loads modules onto live surfaces that have an element", () => {
+    const extra: Module = {
+      id: "demo",
+      actions: [noop],
+    }
+    const ui = create({ modules: [extra] })
+    ui.registerSurface({
+      name: "page",
+      description: "page",
+      element: {} as Element,
+      actions: [],
+    })
+    ui.focus.enter("page")
+
+    expect(ui.schema().surfaces[0]?.actions).toEqual([
+      { id: "noop", description: "Do nothing" },
+    ])
+  })
+
+  it("omits modules on live surfaces without an element", () => {
     const extra: Module = {
       id: "demo",
       actions: [noop],
@@ -35,10 +54,7 @@ describe("create", () => {
     const ui = create({ modules: [extra] })
     ui.registerSurface({ name: "page", description: "page", actions: [] })
     ui.focus.enter("page")
-
-    expect(ui.schema().surfaces[0]?.actions).toEqual([
-      { id: "noop", description: "Do nothing" },
-    ])
+    expect(ui.schema().surfaces[0]?.actions).toEqual([])
   })
 
   it("omits modules when none are passed", () => {

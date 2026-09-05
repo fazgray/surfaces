@@ -27,6 +27,13 @@ describe("dom module", () => {
     expect(ui.schema().surfaces[0]?.actions).toEqual([])
   })
 
+  it("omits scroll and zoom on live surfaces without an element", () => {
+    const ui = create({ modules: [dom] })
+    ui.registerSurface({ name: "profile", description: "profile" })
+    ui.focus.enter("profile")
+    expect(ui.schema().surfaces[0]?.actions).toEqual([])
+  })
+
   it("adds scroll and zoom actions to live surfaces", () => {
     const ui = create({ modules: [dom] })
     ui.registerSurface({
