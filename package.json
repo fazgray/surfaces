@@ -25,10 +25,10 @@
     "typecheck": "tsc --pretty --noEmit -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest --watch",
-    "format": "prettier --write 'src/**/*.{ts,json,md}' '*.{json,md}'",
+    "format": "prettier --write .",
     "clean": "rimraf dist",
-    "build": "pnpm run clean && tsc -p tsconfig.build.json",
-    "watch": "tsc -p tsconfig.build.json --watch"
+    "watch": "tsc -p tsconfig.build.json --watch",
+    "build": "pnpm run clean && tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "zod": "^4.5.4"
