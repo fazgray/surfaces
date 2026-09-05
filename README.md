@@ -2,31 +2,44 @@
 
 Build web UIs that LLMs can act on.
 
-## Install
-
-```bash
-pnpm add @fazgray/surfaces
-```
-
-## Usage
-
-You're on the page. You say "scroll down."
-
 ```ts
 import { create } from "@fazgray/surfaces"
-import { dom } from "@fazgray/surfaces/modules/dom"
+import { z } from "zod"
 
-const ui = create({ modules: [dom] })
+const ui = create()
 
 ui.registerSurface({
   name: "chat",
-  description: "The chat page",
-  element: pageEl,
+  description: "The chat thread and composer",
+  actions: [
+    {
+      id: "addChat",
+      description: "Send a message to the LLM",
+      params: z.object({ message: z.string() }),
+      run: ({ message }) => addChat(message),
+    },
+  ],
 })
+
 ui.focus.enter("chat")
 
-await ui.run(await model(ui.schema(), "scroll down"))
+const result = await model(ui.schema(), prompt)
+await ui.run(result)
 ```
+
+The focused `schema()` is what you send the model.
+
+## How it works
+
+1. You register surfaces — named regions of your UI — each with actions and handlers.
+2. `focus` decides what’s live. Only the live set goes into `schema()`.
+3. You send that JSON to a model. It returns `{ actionId, surface, params }`. `run` validates and calls your handler.
+
+- **Focus** — the live surfaces. Several can be live at once, each with its own actions.
+- **Actions** — named capabilities with optional Zod params. What the model is allowed to do.
+- **Handlers** — your functions. The lib never talks to the model.
+
+No computer-use, no MCP. You own the UI, the tools, and the model call.
 
 ## API
 
@@ -42,19 +55,17 @@ ui.focus.pin(surfaceName)
 ui.focus.clear()
 
 ui.schema()
-await ui.run(result)
+await ui.run({ actionId, surface?, params? })
 ```
-
-- **`maxLive`** — how many surfaces can be live at once. Default `8`.
-- **`modules`** — optional action groups. Pass `[dom]` for scroll and zoom, or omit to turn them off.
-- **`focus`** — the live set. `enter` / `leave` move surfaces in and out. `pin` keeps a surface live and makes it the default target when the same action exists on more than one surface.
-- **`schema()`** — only the live surfaces, as JSON (descriptions + JSON Schema). That is what you send to a model.
-- **`run`** — validates params and executes the handler. Pass `surface` when the `actionId` is ambiguous.
 
 ## DOM module
 
 ```ts
 import { dom } from "@fazgray/surfaces/modules/dom"
+
+const ui = create({ modules: [dom] })
 ```
 
-Adds `dom.scroll.down`, `dom.scroll.up`, `dom.scroll.top`, `dom.scroll.bottom`, `dom.zoom.in`, `dom.zoom.out`, and `dom.zoom.reset`. They use the surface’s `element` when present, otherwise the window.
+Adds scroll and zoom to every live surface: `dom.scroll.down`, `dom.scroll.up`, `dom.scroll.top`, `dom.scroll.bottom`, `dom.zoom.in`, `dom.zoom.out`, `dom.zoom.reset`. They use the surface’s `element` when present, otherwise the window.
+
+## MIT
