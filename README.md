@@ -1,6 +1,12 @@
-# @fazgray/surfaces
+# Surfaces
 
-Build web UIs that LLMs can act on. [Demo](https://fazgray.github.io/surfaces/)
+Build web UIs that LLMs can act on.
+
+[Demo](https://fazgray.github.io/surfaces/)
+
+---
+
+<br/>
 
 ```ts
 import { create } from "@fazgray/surfaces"
